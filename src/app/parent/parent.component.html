@@ -3,13 +3,34 @@
         <div class="col-6 p-5">
             <div class="border border-primary min-vh-100">
                 <h4 class="text-center m-3">Parent</h4>
-                <h6 class="ms-4">{{queOptions.question}}</h6>
-                <h2 class="text-center" [ngClass]="[ feedBackBg ? 'positive':'negative']">{{feedBack}}</h2>
+                <!-- <h6 class="ms-4">{{queOptions.question}}</h6>
+                <h2 class="text-center" [ngStyle]="{'border' : feedBackBg ? '2px solid green ' : '2px solid red' }"
+                    [ngClass]="feedBackBg ? 'positive':'negative'">{{feedBack}}</h2> -->
+                    <button class="btn btn-primary" (click)="showChild()">{{buttonName}}</button>
             </div>
         </div>
-        <div class="col-6 p-5">
-            <app-child [feedBack]="reply" [options]="queOptions.options" (answer)='showExpression($event)'></app-child>
-        </div>
+        <ng-container *ngIf="showChild">
+            <div class="col-6 p-5">
+                <ng-container *ngIf="toggle">
+                    <app-child [(toggle)]="toggle" [options]="queOptions.options" [feedBack]="reply" (answer)='showExpression($event)'></app-child>
+                </ng-container>
+            </div>
+        </ng-container>
     </div>
 </div>
 
+<!-- 
+<div class="header bg-primary my-5">
+    Hey, I'm header from child!!
+    <ng-template [ngIf]="true">
+        <ng-content select="[header]"></ng-content>
+    </ng-template>
+</div>
+
+<ng-content></ng-content>
+
+<div class="footer bg-info">
+    Hey, I'm footer form child!!!
+    <ng-content select="[footer]"></ng-content>
+    <ng-content select="[home]"></ng-content>
+</div> -->

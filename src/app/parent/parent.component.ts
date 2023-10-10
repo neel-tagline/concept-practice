@@ -7,21 +7,40 @@ import { Component, Output } from '@angular/core';
 })
 export class ParentComponent {
 
-public queOptions : any = {
-    question : 'Neel, Do you have work completed?',
-    options : [ 'yes', 'no'],
+  public queOptions: any = {
+    question: 'Neel, Do you have work completed?',
+    options: [],
+  }
+  public feedBack: string = '';
+  public reply: string = '';
+  public feedBackBg: boolean = false;
+  public toggle: boolean = false;
+  public buttonName:string = 'Show Child';
+
+  constructor(){ 
+    this.queOptions.options = ['yes', 'no']
+    console.log('parent constructor :>> ');
+  }
+  ngOnChange(){
+    console.log('parent Changes :>> ', this.buttonName);
+    this.buttonName = 'Close Child'
+  }
+  showExpression(event: any) {
+
+    event == 'yes' ? this.feedBack = 'Very Good' : this.feedBack = 'Very Bad';
+    event == 'yes' ? this.feedBackBg = true : this.feedBackBg = false;
+    setTimeout(() => {
+      event == 'yes' ? this.reply = 'Thank You!!!' : this.reply = 'Sorry...';
+    }, 500);
   }
 
-public feedBack: string = '';
-public reply: string = '';
-public feedBackBg: boolean = false;
+  sum(a: number, b: number): number {
+    return a + b;
+  }
 
-showExpression(event:any){
-  event == 'yes' ? this.feedBack = 'Very Good' : this.feedBack = 'Very Bad';
-  event == 'yes' ? this.feedBackBg = true : this.feedBackBg = false;
-  setTimeout(() => {
-    event == 'yes' ? this.reply = 'Thank You!!!' : this.reply = 'Sorry...';
-  }, 500);
-  console.log("Event>>>>>>",event);
-}
+  showChild(){
+    this.buttonName = this.toggle ? 'Show Child' : 'Close Child'
+    this.toggle = !this.toggle;
+  }
+
 }

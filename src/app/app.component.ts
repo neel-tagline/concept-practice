@@ -7,4 +7,6 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'concept-practice';
+
+  header = [1,2,3,4,5,6]
 }
